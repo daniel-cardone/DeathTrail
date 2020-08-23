@@ -25,12 +25,11 @@ public class Trails {
     // Return an integer array of the player's x, y, and z position
     private static int[] getPos(Player target) {
         Location loc = target.getLocation();
-        int x = (int)loc.getX();
-        int y = (int)loc.getY();
-        int z = (int)loc.getZ();
+        int x = loc.getBlockX();
+        int y = loc.getBlockY();
+        int z = loc.getBlockZ();
 
-        // Adjust the x value so it is not inaccurate
-        return new int[] {--x, y, z};
+        return new int[] {x, y, z};
     }
 
     public static void wideTrail(Plugin plugin, Player target) {
