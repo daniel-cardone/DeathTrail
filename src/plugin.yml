@@ -1,0 +1,35 @@
+name: DeathTrail
+version: 1.0
+author: BlueScript_
+main: DeathTrail
+api-version: 1.16
+commands:
+  trail:
+    description: Toggle a player's death trail on/off
+    usage: /trail <player>
+    permission: deathtrail.trail
+  trailtype:
+    description: Specify how the trails will behave
+    usage: /trailtype <wide/hole/cube/void>
+    permission: deathtrail.trailtype
+  trailspeed:
+    description: Specify how frequently a the trails appear (20 ticks = 1 second)
+    usage: /trailspeed <ticks>
+    permission: deathtrail.trailspeed
+
+permissions:
+  deathtrail.*:
+    description: Gives access to all DeathTrail commands
+    children:
+      deathtrail.trail: true
+      deathtrail.trailtype: true
+      deathtrail.trailspeed: true
+  deathtrail.trail:
+    description: Allows you to toggle a player's trail
+    default: op
+  deathtrail.trailtype:
+    description: Allows you to specify the type of trail that is active
+    default: op
+  deathtrail.trailspeed:
+    description: Allows you to specify how frequently trails appear
+    default: op
