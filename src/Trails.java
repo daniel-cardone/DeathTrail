@@ -1,13 +1,19 @@
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Trails {
     static int delay = 500;
+    static List<Material> indestructibleBlocks = Arrays.asList(
+            Material.OBSIDIAN, Material.NETHER_PORTAL, Material.END_PORTAL, Material.END_PORTAL_FRAME
+    );
 
     // Asynchronously set a timeout to allow the player to move from their location
     public static void setTimeout(Runnable runnable, int delay) {
@@ -55,7 +61,11 @@ public class Trails {
 
                 // Remove each block
                 for (int[] block: blocks) {
-                    target.getWorld().getBlockAt(block[0], block[1], block[2]).setType(Material.AIR);
+                    Block b = target.getWorld().getBlockAt(block[0], block[1], block[2]);
+                    if (indestructibleBlocks.contains(b.getType())) { // Ignore "indestructible" blocks
+                        continue;
+                    }
+                    b.setType(Material.AIR);
                 }
                 return true;
             });
